@@ -196,6 +196,7 @@ def dynamical_local_indexes( X , Y = None , ql = 0.98 , ld_fit = "SDFC" , theta_
 		return_where = False
 	
 	## Data in good format
+	YisX = Y is None
 	if X.ndim == 2:
 		X = X.reshape( X.shape + (1,) )
 	if Y is None:
@@ -215,6 +216,10 @@ def dynamical_local_indexes( X , Y = None , ql = 0.98 , ld_fit = "SDFC" , theta_
 	for i,j in itt.combinations(range(n_traj),2):
 		dist[:,:,i,j] = cross_metric(dist[:,:,i,i],dist[:,:,j,j])
 	
+	if YisX:
+		idx_diag = np.diag_indices(n_sampleX)
+		for i in range(n_traj):
+			dist[:,:,i,i][idx_diag] = sys.float_info.max
 	dist[~(dist > 0)] = sys.float_info.max
 	dist = -np.log(dist)
 	
@@ -255,4 +260,5 @@ def dynamical_local_indexes( X , Y = None , ql = 0.98 , ld_fit = "SDFC" , theta_
 	
 	return out
 ##}}}
+
 

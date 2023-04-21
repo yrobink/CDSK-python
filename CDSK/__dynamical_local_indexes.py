@@ -211,7 +211,7 @@ def dynamical_local_indexes( X , Y = None , ql = 0.98 , ld_fit = "SDFC" , theta_
 	dist = np.zeros( (n_sampleX,n_sampleY,n_traj,n_traj) )
 	for i in range(n_traj):
 		dist[:,:,i,i] = skmp.pairwise_distances( X[:,:,i] , Y[:,:,i] , metric = metric , n_jobs = n_jobs )
-		dist[:,:,i,i] /= np.linalg.norm( dist[:,:,i,i] , 1 )
+		dist[:,:,i,i] /= np.linalg.norm( dist[:,:,i,i] , axis = 1 ).reshape(-1,1)
 	
 	for i,j in itt.combinations(range(n_traj),2):
 		dist[:,:,i,j] = cross_metric(dist[:,:,i,i],dist[:,:,j,j])

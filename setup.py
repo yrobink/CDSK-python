@@ -17,44 +17,64 @@
 ## You should have received a copy of the GNU General Public License
 ## along with CDSK.  If not, see <https://www.gnu.org/licenses/>.
 
-## Read release informations
-from CDSK.__release import name
-from CDSK.__release import version
-from CDSK.__release import description
-from CDSK.__release import long_description
-from CDSK.__release import authors
-from CDSK.__release import authors_email
-from CDSK.__release import src_url
-from CDSK.__release import license
+##############
+## Packages ##
+##############
 
+import setuptools
+from setuptools import setup
+from pathlib import Path
+
+########################
+## Infos from release ##
+########################
+
+cpath = Path(__file__).parent
+release: dict[str,str] = {}
+exec( (cpath / "CDSK" / "__release.py").read_text() , {} , release )
+long_description = (cpath / "README.md").read_text()
 
 ## Required elements
-author           = ", ".join(authors)
-author_email     = ", ".join(authors_email)
-packages         = ["CDSK","CDSK.fractal"]
-package_dir      = { "CDSK" : "CDSK" }
 requires         = [ "numpy",
-					 "scipy",
-					 "matplotlib",
-					 "sklearn",
-					 "SDFC (>=0.5.0)"]
-keywords         = ["Dynamical-system","chaos","attractor","local-dimension"]
-platforms        = ["linux","macosx"]
+                     "scipy",
+                     "matplotlib",
+                     "scikit-learn",
+                     "SDFC (>=0.5.0)"]
+list_packages = setuptools.find_packages()
+package_dir   = { "CDSK" : "CDSK" }
 
-## Now the setup
-from distutils.core import setup
 
-setup(  name             = name,
-		version          = version,
-		description      = description,
-		long_description = long_description,
-		author           = author,
-		author_email     = author_email,
-		url              = src_url,
-		packages         = packages,
-		package_dir      = package_dir,
-		requires         = requires,
-		license          = license,
-		keywords         = keywords,
-		platforms        = platforms
-     )
+#######################
+## And now the setup ##
+#######################
+
+
+setup(
+    name         = release['name'],
+    description  = release['description'],
+    long_description = long_description,
+    long_description_content_type = 'text/markdown',
+    version      = release['version'],
+    author       = release['author'],
+    author_email = release['author_email'],
+    license      = release['license'],
+    platforms        = [ "linux" , "macosx" ],
+    classifiers      = [
+        "Development Status :: 5 - Production/Stable",
+        "Natural Language :: English",
+        "Operating System :: MacOS :: MacOS X",
+        "Operating System :: POSIX :: Linux",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
+        "Topic :: Scientific/Engineering :: Mathematics"
+    ],
+    install_requires = requires,
+    zip_safe         = False,
+    packages         = list_packages,
+    package_dir      = package_dir
+)

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-## Copyright(c) 2021 Yoann Robin
+## Copyright(c) 2021 / 2026 Yoann Robin
 ## 
 ## This file is part of CDSK.
 ## 
@@ -101,7 +101,7 @@ class Julia:
 		Run estimation
 		"""
 		z = np.array( [ complex( self._x[i] , self._y[j] ) for i,j in itt.product(range(self._nx),range(self._ny)) ] )
-		idx = np.zeros( (self._nx * self._ny) , dtype = np.float )
+		idx = np.zeros( (self._nx * self._ny) , dtype = float )
 		
 		for _ in range(self._maxit):
 			z = z**2 + self._c

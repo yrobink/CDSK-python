@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-## Copyright(c) 2021 Yoann Robin
+## Copyright(c) 2021 / 2026 Yoann Robin
 ## 
 ## This file is part of CDSK.
 ## 
@@ -18,45 +18,17 @@
 ## along with CDSK.  If not, see <https://www.gnu.org/licenses/>.
 
 version_major = 1
-version_minor = 0
-version_patch = 2
+version_minor = 1
+version_patch = 0
 version_extra = ""
 version       = "{}.{}.{}{}".format(version_major,version_minor,version_patch,version_extra)
 
 
 ##
-
-name = "CDSK"
-
-
-##
-
-description      = "Chaotic Dynamical System Kit"
-long_description = \
-"""
-Chaotic Dynamical System Kit (CDSK)
-
-- Generation of classic chaotic attractors
-- Generation of Mandelbrot and Julia set
-- Estimation of Local Dimension and persistence
-"""
-
-
-##
-
-license = "GNU-GPL3"
-
-
-##
-
-authors       = ["Yoann Robin"]
-authors_email = ["yoann.robin.k@gmail.com"]
-author_doc    = ", ".join( [ ath + " ({})".format(athm) for ath,athm in zip(authors,authors_email) ] )
-
-
-##
-
-src_url = "https://github.com/yrobink/CDSK"
-
-
+name         = "CDSK"
+description  = "Chaotic Dynamical System Kit"
+author       = "Yoann Robin"
+author_email = "yoann.robin+dev.github@ikmail.com"
+license      = "GPL-3.0-or-later"
+url = "https://github.com/yrobink/CDSK"
 
